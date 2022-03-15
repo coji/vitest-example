@@ -3,7 +3,10 @@ import { server } from '../src/mocks/server'
 import { mount } from '@vue/test-utils'
 import App from '../src/App.vue'
 
-beforeAll(() => server.listen())
+beforeAll(() => {
+  server.listen()
+  window.location.href = 'http://localhost:3000/'
+})
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
