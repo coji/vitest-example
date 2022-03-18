@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { useHello } from './composables/useHello'
-import Hello from './components/Hello.vue'
-const { hello } = useHello()
+import { onBeforeMount, ref } from 'vue'
+
+const test = ref('')
+
+onBeforeMount(
+  async () =>
+    (test.value = await fetch('/hello.txt')
+      .then((res) => res.text())
+      .catch((e) => 'error!'))
+)
+console.log(test.value)
 </script>
 
 <template>
-  <div>Hello! {{ hello.message }}</div>
+  <div>Hello {{ test }}</div>
 </template>
