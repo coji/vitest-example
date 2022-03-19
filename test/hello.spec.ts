@@ -1,11 +1,21 @@
 import { render, waitFor, screen } from '@testing-library/vue'
 import { server } from '../src/mocks/server'
 import App from '../src/App.vue'
-import './helper'
 
 describe('describe', async () => {
+  beforeAll(() => {
+    window.location.href = 'http://localhost:3000'
+    server.listen()
+  })
+  afterEach(() => {
+    server.resetHandlers()
+  })
+  afterAll(() => {
+    server.close()
+  })
+
   it('test1', async () => {
     const wrapper = render(App)
-    await wrapper.findAllByText('Hello Mock!')
+    expect(await wrapper.findAllByText('Hello Mock!')).toBeTruthy()
   })
 })
