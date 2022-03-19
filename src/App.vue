@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import ky from 'ky'
 
 const test = ref('')
 
-onBeforeMount(
+onMounted(
   async () =>
     (test.value = await fetch('/hello.txt')
-      .then((res) => res.text())
+      .then(async (res) => {
+        return await res.text()
+      })
       .catch((e) => 'error!'))
 )
-console.log(test.value)
 </script>
 
 <template>

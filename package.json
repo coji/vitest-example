@@ -6,10 +6,11 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest --run --dom --environment=happy-dom",
+    "test": "vitest --dom --environment=happy-dom",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "ky": "^0.30.0",
     "vue": "^3.2.31"
   },
   "devDependencies": {
